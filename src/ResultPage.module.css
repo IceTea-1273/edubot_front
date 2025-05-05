@@ -1,0 +1,115 @@
+.container {
+    background-color: #fed7aa;
+    min-height: calc(100vh - 60px);
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+}
+
+.header {
+    background-color: #FFA06F;
+    padding: 20px 0;
+    font-weight: bold;
+    color: #28544B;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #28544B;
+    margin-bottom: 10px;
+}
+
+.time {
+    margin-bottom: 30px;
+    font-weight: 500;
+    font-size: 18px;
+    color: #28544B;
+    font-family: 'Poppins', sans-serif;
+}
+
+.resultsGrid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.chart {
+    position: relative;
+}
+
+.circleBg {
+    fill: none;
+    stroke: #FFA06F;
+    stroke-width: 3;
+}
+
+.circle {
+    fill: none;
+    stroke: #ACBD86;
+    stroke-width: 3;
+    stroke-linecap: round;
+    transform: rotate(-90deg);
+    transform-origin: center;
+}
+
+.percentText {
+    font-size: 6px;
+    fill: #28544B;
+    font-weight: bold;
+}
+
+.stats p {
+    font-size: 16px;
+    font-weight: bold;
+    color: #28544B;
+}
+
+.correctBox, .incorrectBox {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.correctBox {
+    background-color: #ACBD86;
+    color: white;
+}
+
+.incorrectBox {
+    background-color: #FFA06F;
+    color: white;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+}
+
+.buttons button {
+    padding: 12px 24px;
+    width: 220px;
+    background-color: #FFA06F;
+    color: #28544B;
+    font-weight: bold;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.buttons button:hover {
+    background-color: #ff7d3b;
+}
