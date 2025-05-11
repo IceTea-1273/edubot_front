@@ -12,6 +12,7 @@ function Quiz() {
     const [correctAnswers, setCorrectAnswers] = useState(0);
     const [startTime] = useState(new Date().toISOString());
     const [elapsedTime, setElapsedTime] = useState(0);
+    const [questionStartTime, setQuestionStartTime] = useState(new Date());
     const navigate = useNavigate();
     const user = JSON.parse(localStorage.getItem("user"));
 
@@ -30,6 +31,7 @@ function Quiz() {
                     }
                 });
                 setQuestions(response.data);
+                setQuestionStartTime(new Date());
             } catch (error) {
                 console.error('Failed to fetch questions:', error);
             }
@@ -41,7 +43,7 @@ function Quiz() {
             setElapsedTime(Math.floor((new Date() - new Date(startTime)) / 1000));
         }, 1000);
 
-        return () => clearInterval(timer); // Cleanup interval on unmount
+        return () => clearInterval(timer);
     }, [selectedContinent, selectedDifficulty, navigate, token, startTime]);
 
     const formatTime = (seconds) => {
@@ -52,14 +54,24 @@ function Quiz() {
 
     const handleAnswer = async (selectedAnswer) => {
         const currentQuestion = questions[currentQuestionIndex];
+        const now = new Date();
+        const timeTakenMs = now - questionStartTime;
 
         if (selectedAnswer === currentQuestion.correctAnswer) {
-            setScore(prev => prev + (currentQuestion.points || 0));
+            const maxPoints = 1500;
+            const minPoints = 500;
+            const lostPoints = Math.floor(timeTakenMs / 10);
+            const awardedPoints = Math.max(minPoints, maxPoints - lostPoints);
+
+            console.log(`Correct! Answered in ${(timeTakenMs / 1000).toFixed(2)}s, awarded ${awardedPoints} points.`);
+
+            setScore(prev => prev + awardedPoints);
             setCorrectAnswers(prev => prev + 1);
         }
 
         if (currentQuestionIndex + 1 < questions.length) {
             setCurrentQuestionIndex(prev => prev + 1);
+            setQuestionStartTime(new Date());
         } else {
             await submitQuiz();
         }
@@ -68,7 +80,6 @@ function Quiz() {
     const submitQuiz = async () => {
         const end = new Date();
         const durationMs = end - new Date(startTime);
-
         const minutes = Math.floor(durationMs / 60000);
         const seconds = Math.floor((durationMs % 60000) / 1000);
         const formattedTime = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
@@ -83,13 +94,14 @@ function Quiz() {
                 completed: true
             };
 
+            console.log('Submitting quiz data:', quizData);
+
             await axios.post('http://localhost:8080/eduBot/quiz', quizData, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             });
 
-            // 🟢 NEW: Update highscore if current score is higher
             if (score > user.highscore) {
                 await axios.patch(`http://localhost:8080/eduBot/user/highscore/${user.id}/${score}`, null, {
                     headers: {
@@ -97,7 +109,6 @@ function Quiz() {
                     }
                 });
 
-                // Update localStorage too
                 const updatedUser = { ...user, highscore: score };
                 localStorage.setItem('user', JSON.stringify(updatedUser));
             }
@@ -114,7 +125,6 @@ function Quiz() {
         }
     };
 
-
     if (questions.length === 0) {
         return <div>Loading questions...</div>;
     }
@@ -123,7 +133,6 @@ function Quiz() {
 
     return (
         <div className={styles.container}>
-            {/* Header (orange bar) */}
             <div className={styles.questionInfoBar}>
                 <div className={styles.questionCount}>
                     QUESTION {currentQuestionIndex + 1} OF {questions.length}
