@@ -40,7 +40,6 @@ body {
     line-height: 1.2;
 }
 
-/* Responsive grid of continents */
 .grid {
     display: flex;
     flex-wrap: wrap;
@@ -60,7 +59,7 @@ body {
 .imageHolder {
     width: 175px;
     height: 175px;
-    border-radius: 50%;  /* Make the image circular */
+    border-radius: 50%;
     background-color:  #ACBD86;
     display: flex;
     justify-content: center;

@@ -23,7 +23,7 @@ function Header() {
             </div>
             <nav className={styles.nav}>
                 <Link to="/" className={styles.link}>Home</Link>
-                <Link to="/leaderboard" className={styles.link}>Leaderboard</Link> {/* 🔁 Changed here */}
+                <Link to="/leaderboard" className={styles.link}>Leaderboard</Link>
             </nav>
         </header>
     );

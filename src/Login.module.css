@@ -5,7 +5,6 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
-/* Container with background image and centering */
 .container {
     min-height: calc(100vh - 50px);
     display: flex;
@@ -16,7 +15,6 @@ body {
     background-size: cover;
 }
 
-/* Form styling */
 .form {
     max-width: 400px;
     margin: 100px auto;
@@ -24,7 +22,6 @@ body {
     text-align: center;
 }
 
-/* Label styling */
 .label {
     display: block;
     margin-bottom: 8px;
@@ -34,7 +31,6 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
-/* Input fields */
 .input {
     width: 100%;
     padding: 8px;
@@ -45,7 +41,6 @@ body {
     border-radius: 4px;
 }
 
-/* Submit button */
 .button {
     padding: 10px 20px;
     background-color: #FFA06F;

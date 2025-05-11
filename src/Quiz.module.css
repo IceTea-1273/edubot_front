@@ -6,12 +6,11 @@ body {
 
 .container {
     background-color: #fed7aa;
-    min-height: calc(100vh - 60px); /* adjust for green header */
+    min-height: calc(100vh - 60px);
     display: flex;
     flex-direction: column;
 }
 
-/* Orange header */
 .questionInfoBar {
     width: 100%;
     background-color: #FFA06F;
@@ -27,7 +26,6 @@ body {
     text-align: center;
 }
 
-/* Content wrapper centers the card */
 .content {
     flex-grow: 1;
     display: flex;

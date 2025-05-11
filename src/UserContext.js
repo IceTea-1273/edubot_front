@@ -25,7 +25,6 @@ export const UserProvider = ({ children }) => {
         setTokenState(newToken);
     };
 
-    // Optional: Ensure token in localStorage is always reflected in state (once on mount)
     useEffect(() => {
         const savedToken = localStorage.getItem('token');
         if (savedToken && !token) {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUserContext } from './UserContext';
-import styles from './ContinentSelector.module.css';  // Import the CSS module
+import styles from './ContinentSelector.module.css';
 
 function ContinentSelector() {
     const { setSelectedContinent, token, selectedContinent, selectedDifficulty } = useUserContext();
